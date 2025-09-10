@@ -20,6 +20,7 @@ import {
 interface Student {
   id: string;
   name: string;
+  registerNumber: string;
   department: string;
   year: string;
   semester: string;
@@ -37,6 +38,7 @@ const Dashboard = () => {
   const [showAddStudent, setShowAddStudent] = useState(false);
   const [newStudent, setNewStudent] = useState({
     name: "",
+    registerNumber: "",
     bloodGroup: "",
     phone: "",
     email: "",
@@ -55,7 +57,7 @@ const Dashboard = () => {
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
   const handleAddStudent = () => {
-    if (!newStudent.name || !newStudent.email || !newStudent.phone) {
+    if (!newStudent.name || !newStudent.registerNumber || !newStudent.email || !newStudent.phone) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields",
@@ -76,6 +78,7 @@ const Dashboard = () => {
     setStudents([...students, student]);
     setNewStudent({
       name: "",
+      registerNumber: "",
       bloodGroup: "",
       phone: "",
       email: "",
@@ -251,6 +254,7 @@ const Dashboard = () => {
                     <div>
                       <h4 className="font-semibold">{student.name}</h4>
                       <p className="text-sm text-muted-foreground">{student.email}</p>
+                      <p className="text-sm text-muted-foreground">Reg: {student.registerNumber}</p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-medium">{student.phone}</p>
@@ -280,6 +284,15 @@ const Dashboard = () => {
                   value={newStudent.name}
                   onChange={(e) => setNewStudent({...newStudent, name: e.target.value})}
                   placeholder="Enter student name"
+                />
+              </div>
+              <div>
+                <Label htmlFor="registerNumber">Register Number *</Label>
+                <Input
+                  id="registerNumber"
+                  value={newStudent.registerNumber}
+                  onChange={(e) => setNewStudent({...newStudent, registerNumber: e.target.value})}
+                  placeholder="Enter register number"
                 />
               </div>
               <div>
